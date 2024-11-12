@@ -1,7 +1,7 @@
-# QR-Code-Generator
+# QR Code Generator
 Simple python script to generate QR codes from an URL.
 
-## WebApp
+## WebApp 
 
 WebApp is hosted on Anaconda Cloud.
 
