@@ -3,9 +3,9 @@ Simple python script to generate QR codes from an URL.
 
 ## WebApp 
 
-WebApp is hosted on Anaconda Cloud.
+WebApp is hosted here:
 
-[https://riveting-prairie-kingsnake.anacondaapps.cloud](https://riveting-prairie-kingsnake.anacondaapps.cloud)
+[https://vigilant-davinci.217-154-75-75.plesk.page/app/qr-code-generator/](https://vigilant-davinci.217-154-75-75.plesk.page/app/qr-code-generator/)
 
 ## Screenshot
 
