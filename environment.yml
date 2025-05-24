@@ -1,5 +1,5 @@
 name: 
-  /var/www/vhosts/vigilant-davinci.217-154-75-75.plesk.page/app/qr-code-generator/.conda
+  /home/user/app/qr-code-generator/.conda
 channels:
   - defaults
 dependencies:
@@ -10,4 +10,4 @@ dependencies:
   - jupyter_bokeh
   - nbconvert
 prefix: 
-  /var/www/vhosts/vigilant-davinci.217-154-75-75.plesk.page/app/qr-code-generator/.conda
+  /home/user/app/qr-code-generator/.conda
