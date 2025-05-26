@@ -1,5 +1,5 @@
 # QR Code Generator
-Simple python script to generate QR codes from an URL.
+A web-based tool that allows users to generate customized QR codes from URLs, with options to set error correction, size, colors, and download the generated image.
 
 ## WebApp 
 

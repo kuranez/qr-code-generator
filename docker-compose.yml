@@ -1,0 +1,6 @@
+services:
+  qrcodegenerator:
+    image: qr-code-generator
+    build:
+      context: .
+      dockerfile: ./Dockerfile
