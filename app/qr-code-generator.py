@@ -91,6 +91,7 @@ app = pn.Column(
 
 template = pn.template.MaterialTemplate(
     title='QR Code Generator',
+    logo='./app/logo_small.png',
     sidebar=[pn.pane.Markdown("### Advanced Options:"),
              version_input,
              error_correction_input,
