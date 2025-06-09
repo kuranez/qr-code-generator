@@ -1,12 +1,13 @@
 import os
 import qrcode
+from qrcode.constants import ERROR_CORRECT_L, ERROR_CORRECT_M, ERROR_CORRECT_Q, ERROR_CORRECT_H
 import panel as pn
 
 # Activate Panel extension (necessary in Jupyter notebooks)
 pn.extension()
 
 # Output directory and file path
-output_dir = "./output"
+output_dir = os.path.join(os.path.dirname(__file__), "output")
 os.makedirs(output_dir, exist_ok=True)
 file_path = os.path.join(output_dir, "qr_code.png")
 
@@ -22,12 +23,12 @@ version_input = pn.widgets.IntSlider(name='Version (1-40)', start=1, end=40, val
 error_correction_input = pn.widgets.Select(
     name='Error Correction',
     options={
-        'Low (7%)': qrcode.constants.ERROR_CORRECT_L,
-        'Medium (15%)': qrcode.constants.ERROR_CORRECT_M,
-        'Quartile (25%)': qrcode.constants.ERROR_CORRECT_Q,
-        'High (30%)': qrcode.constants.ERROR_CORRECT_H
+        'Low (7%)': ERROR_CORRECT_L,
+        'Medium (15%)': ERROR_CORRECT_M,
+        'Quartile (25%)': ERROR_CORRECT_Q,
+        'High (30%)': ERROR_CORRECT_H
     },
-    value=qrcode.constants.ERROR_CORRECT_H  # Default to highest correction
+    value=ERROR_CORRECT_H  # Default to highest correction
 )
 box_size_input = pn.widgets.IntSlider(name='Box Size (pixels)', start=1, end=20, value=10, step=1)
 border_input = pn.widgets.IntSlider(name='Border (minimum 4)', start=1, end=10, value=4, step=1)

@@ -1,0 +1,15 @@
+name: qrenv
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - panel
+  - jupyterlab
+  - ipykernel
+  - numpy
+  - pandas
+  - matplotlib
+  - qrcode
+  - pip
+  - pip:
+  - pypng
