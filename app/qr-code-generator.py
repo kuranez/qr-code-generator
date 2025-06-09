@@ -1,15 +1,35 @@
+# app/qr-code-generator.py
+
+# QR Code Generator Application
+# This script creates a simple QR code generator using the Panel library and qrcode package.
+# It allows users to input a URL, customize QR code appearance, and download the generated QR code image.
+
+# Imports
+
+# os for file path management
 import os
+# qrcode for generating QR codes
 import qrcode
+# qrcode.constants for error correction constants
 from qrcode.constants import ERROR_CORRECT_L, ERROR_CORRECT_M, ERROR_CORRECT_Q, ERROR_CORRECT_H
+# Panel for creating the web application
 import panel as pn
 
 # Activate Panel extension (necessary in Jupyter notebooks)
 pn.extension()
 
-# Output directory and file path
+# File Paths
+# output/ # Ensure the output directory exists
 output_dir = os.path.join(os.path.dirname(__file__), "output")
 os.makedirs(output_dir, exist_ok=True)
+# qr_code.png # Path to save the generated QR code image
 file_path = os.path.join(output_dir, "qr_code.png")
+# assets/ # Ensure the assets directory exists
+assets_dir = os.path.join(os.path.dirname(__file__), "assets")
+os.makedirs(assets_dir, exist_ok=True)
+# logo.png and qrapp_small.png # Paths to the logo and image assets
+logo_path = os.path.join(assets_dir, "logo.png")
+image_path = os.path.join(assets_dir, "qrapp_small.png")
 
 # Input Widgets
 url_input = pn.widgets.TextInput(name='URL', value="https://github.com/kuranez/QR-Code-Generator")
@@ -34,7 +54,7 @@ box_size_input = pn.widgets.IntSlider(name='Box Size (pixels)', start=1, end=20,
 border_input = pn.widgets.IntSlider(name='Border (minimum 4)', start=1, end=10, value=4, step=1)
 
 # Placeholder Image
-qr_display = pn.pane.Image(width=500, height=500)
+qr_display = pn.pane.PNG(width=500, height=500)
 
 # Generate QR Code on click
 def generate_qr(event):
@@ -92,7 +112,7 @@ app = pn.Column(
 
 template = pn.template.MaterialTemplate(
     title='QR Code Generator',
-    logo='./app/logo_small.png',
+    logo=logo_path,
     sidebar=[pn.pane.Markdown("### Advanced Options:"),
              version_input,
              error_correction_input,
