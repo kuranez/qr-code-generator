@@ -1,6 +1,10 @@
+version: "3.8"
+
 services:
   qrcodegenerator:
-    image: qr-code-generator
+    image: kuranez/qr-code-generator:latest
     build:
       context: .
       dockerfile: ./Dockerfile
+    ports:
+      - "5010:5010"
