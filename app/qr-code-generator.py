@@ -8,6 +8,8 @@
 
 # os for file path management
 import os
+# io for handling in-memory file operations
+import io
 # qrcode for generating QR codes
 import qrcode
 # qrcode.constants for error correction constants
@@ -27,9 +29,9 @@ file_path = os.path.join(output_dir, "qr_code.png")
 # assets/ # Ensure the assets directory exists
 assets_dir = os.path.join(os.path.dirname(__file__), "assets")
 os.makedirs(assets_dir, exist_ok=True)
-# logo.png and qrapp_small.png # Paths to the logo and image assets
+# logo.png and qrapp.png # Paths to the logo and image assets
 logo_path = os.path.join(assets_dir, "logo.png")
-image_path = os.path.join(assets_dir, "qrapp_small.png")
+image_path = os.path.join(assets_dir, "qrapp.png")
 
 # Input Widgets
 url_input = pn.widgets.TextInput(name='URL', value="https://github.com/kuranez/QR-Code-Generator")
@@ -57,15 +59,26 @@ border_input = pn.widgets.IntSlider(name='Border (minimum 4)', start=1, end=10, 
 qr_display = pn.pane.PNG(width=500, height=500)
 
 # Generate QR Code on click
+download_buf = io.BytesIO()
+def get_file():
+    return download_buf.getvalue()
+
+
+download_button = pn.widgets.FileDownload(
+    filename="qr_code.png", 
+    button_type="success",
+    file=get_file
+)
+
 def generate_qr(event):
     url = url_input.value
-    version = version_input.value
-    error_correction = error_correction_input.value
-    box_size = box_size_input.value
-    border = border_input.value
+    version = int(version_input.value)
+    error_correction = int(error_correction_input.value)
+    box_size = int(box_size_input.value)
+    border = int(border_input.value)
     fill_color = fill_color_picker.value
     back_color = back_color_picker.value
-    
+
     # Create QR code with specified options
     qr = qrcode.QRCode(
         version=version,
@@ -77,10 +90,20 @@ def generate_qr(event):
     qr.clear()  # Clear any previous data to ensure a fresh QR code
     qr.add_data(url)
     qr.make(fit=True)
-    img = qr.make_image(fill_color=fill_color, back_color=back_color).convert('RGB')
-    img.save(file_path)
-    qr_display.object = None  # Clear previous image (helps prevent caching)
-    qr_display.object = file_path  # Update the display
+    img = qr.make_image(fill_color=fill_color, back_color=back_color)
+    
+    # Save the QR code image to a file
+    # img.save(file_path)
+
+    # Save to an in-memory buffer for download and display
+    download_buf.seek(0)
+    download_buf.truncate()
+    img.save(download_buf, format='PNG')
+    download_buf.seek(0)
+
+    # Update the QR display pane with the new image
+    qr_display.object = download_buf.getvalue()
+
 
 # Bind function to button clock
 generate_button.on_click(generate_qr)
@@ -118,13 +141,24 @@ template = pn.template.MaterialTemplate(
              error_correction_input,
              box_size_input,
              border_input,
+             pn.Spacer(),
              pn.pane.Markdown("### Info:"),
+             pn.pane.Markdown("This is a simple QR Code Generator application built with **`panel`** and **`qrcode`** library."),
+             pn.pane.Markdown("You can generate QR codes for any URL and customize their appearance."),
+             pn.pane.Markdown("In addition to the basic options, you can also adjust the version, error correction level, box size, and border size of the QR code."),
+             pn.pane.Markdown("**Check the `documentation` for more details.**"),
+             pn.Spacer(),
+             pn.pane.Markdown("### Source Code:"),
              pn.pane.Markdown("[https://github.com/kuranez/QR-Code-Generator](https://github.com/kuranez/QR-Code-Generator)"),
+             pn.layout.HSpacer(),
+             pn.pane.PNG(image_path, width=320, height=320, align='center'),
+             pn.layout.HSpacer()
             ],
 )
 
 template.main.append(
     pn.Column(
+        pn.pane.Markdown("### Enter a URL to generate a QR code:"),
         pn.Row(url_input, fill_color_picker,back_color_picker),
         pn.Row(generate_button, download_button),
         qr_display
