@@ -1,12 +1,10 @@
-version: "3.10"
-
 services:
-  qrcodegenerator:
-    image: kuranez/qr-code-generator:latest
-    container_name: qr-code-generator
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+  panel-app:
+    build: .
+    user: "10000:1003"  # webadmin:psacln
     ports:
       - "5010:5010"
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
     
