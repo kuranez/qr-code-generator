@@ -18,7 +18,7 @@ from qrcode.constants import ERROR_CORRECT_L, ERROR_CORRECT_M, ERROR_CORRECT_Q, 
 import panel as pn
 
 # Activate Panel extension (necessary in Jupyter notebooks)
-pn.extension()
+pn.extension('floatpanel')
 
 # File Paths
 # output/ # Ensure the output directory exists
@@ -32,9 +32,20 @@ os.makedirs(assets_dir, exist_ok=True)
 # logo.png and qrapp.png # Paths to the logo and image assets
 logo_path = os.path.join(assets_dir, "logo.png")
 image_path = os.path.join(assets_dir, "qrapp.png")
+# docs/ # Ensure the docs directory exists
+docs_dir = os.path.join(os.path.dirname(__file__), "docs")
+os.makedirs(docs_dir, exist_ok=True)
+# documentation.md # Path to the documentation 
+doc_path = os.path.join(docs_dir, "qr-code-generator-documentation.md")
+
+# Read the documentation content
+if not os.path.exists(doc_path):
+    raise FileNotFoundError(f"Documentation file not found at {doc_path}")
+with open(doc_path, "r", encoding="utf-8") as f:
+    doc_content = f.read()
 
 # Input Widgets
-url_input = pn.widgets.TextInput(name='URL', value="https://github.com/kuranez/QR-Code-Generator")
+url_input = pn.widgets.TextInput(name='URL', value="https://github.com/kuranez/qr-code-generator")
 generate_button = pn.widgets.Button(name='Generate QR Code', button_type='primary')
 
 fill_color_picker = pn.widgets.ColorPicker(name='QR Color', value='#000000')  # Black by default
@@ -63,13 +74,14 @@ download_buf = io.BytesIO()
 def get_file():
     return download_buf.getvalue()
 
-
+# Create a download button for the QR code image
 download_button = pn.widgets.FileDownload(
     filename="qr_code.png", 
     button_type="success",
     file=get_file
 )
 
+# Function to generate QR code
 def generate_qr(event):
     url = url_input.value
     version = int(version_input.value)
@@ -115,11 +127,49 @@ download_button = pn.widgets.FileDownload(
     file=file_path
 )
 
+# Create a FloatingPanel for documentation
+doc_panel = pn.FloatPanel(
+    pn.pane.Markdown(doc_content, width=600, height=600),
+    width=650,
+    height=650,
+    margin=20,
+)
+
+# Create a button styled as a link
+doc_button = pn.widgets.Button(
+    name="🢅",
+    button_type="primary",
+    css_classes=["link-button"],
+)
+
+doc_panel.visible = False
+
+def toggle_doc(event):
+    if doc_panel.visible is True:
+        doc_panel.visible = False
+    else:
+        doc_panel.visible = True
+
+doc_button.on_click(toggle_doc)
+
+# Add custom CSS to make the button look like a link
+pn.config.raw_css.append("""
+.link-button button {
+    background: none !important;
+    border: none !important;
+    color: #007bff !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    font-size: 0.5em !important;
+}
+""")
+
 # Layout widgets
 app = pn.Column(
     "## QR Code Generator",
-    url_input, 
-    pn.Row(fill_color_picker,back_color_picker),
+    url_input,
+    pn.Row(fill_color_picker, back_color_picker),
     pn.pane.Markdown("### Advanced Options:"),
     version_input,
     error_correction_input,
@@ -141,28 +191,41 @@ template = pn.template.MaterialTemplate(
              error_correction_input,
              box_size_input,
              border_input,
-             pn.Spacer(),
+             pn.Row(),
              pn.pane.Markdown("### Info:"),
-             pn.pane.Markdown("This is a simple QR Code Generator application built with **`panel`** and **`qrcode`** library."),
-             pn.pane.Markdown("You can generate QR codes for any URL and customize their appearance."),
+             pn.pane.Markdown("This is a simple QR Code Generator application built with **`panel`** and **`qrcode`** library. " \
+             "You can generate QR codes for any URL and customize their appearance."),
+             # pn.pane.Markdown("You can generate QR codes for any URL and customize their appearance."),
              pn.pane.Markdown("In addition to the basic options, you can also adjust the version, error correction level, box size, and border size of the QR code."),
-             pn.pane.Markdown("**Check the documentation for more details.**"),
-             pn.Spacer(),
-             pn.pane.Markdown("### Source Code:"),
-             pn.pane.Markdown("[https://github.com/kuranez/QR-Code-Generator](https://github.com/kuranez/QR-Code-Generator)"),
+             pn.Row(
+                 pn.pane.Markdown("### Check the `documentation` for more: "),
+                 doc_button,
+             ),
+             pn.pane.Markdown("### Source `code`:"),
+             pn.pane.Markdown("[https://github.com/kuranez/qr-code-generator](https://github.com/kuranez/qr-code-generator)"),
              pn.layout.HSpacer(),
-             pn.pane.PNG(image_path, width=320, height=320, align='center'),
-             pn.layout.HSpacer()
+             pn.pane.PNG(image_path, width=300, height=300, align='center'),
+             pn.layout.HSpacer(),
             ],
 )
 
+# Add the floating panel to the template (so it can pop up)
+# template.main.append(doc_panel)
+
+# Add the main application layout to the template
 template.main.append(
-    pn.Column(
-        pn.pane.Markdown("### Enter a URL to generate a QR code:"),
-        pn.Row(url_input, fill_color_picker,back_color_picker),
-        pn.Row(generate_button, download_button),
-        qr_display
+    pn.Row(
+        pn.Column(
+            pn.pane.Markdown("### Enter a URL to generate a QR code:"),
+            pn.Row(url_input, fill_color_picker, back_color_picker),
+            pn.Row(generate_button, download_button),
+            qr_display,
+        ),
+        pn.Column(
+            doc_panel,
+        )
     )
 )
 
+# Serve the application
 template.servable();
