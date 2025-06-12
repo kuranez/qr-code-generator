@@ -16,10 +16,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy application code and relevant folders
 COPY app/ .
-
-# (No user creation or chown)
+COPY app/assets/ ./assets/
+COPY app/docs/ ./docs/
 
 # Expose the application port
 EXPOSE 5010

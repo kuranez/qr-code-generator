@@ -1,7 +1,6 @@
 services:
   panel-app:
     build: .
-    user: "10000:1003"  # webadmin:psacln
     ports:
       - "5010:5010"
     environment:
