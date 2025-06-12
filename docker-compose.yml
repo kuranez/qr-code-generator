@@ -1,8 +1,9 @@
+version: '3.8'
+
 services:
   qr-code-generator:
     image: qr-code-generator
     build: .
-    user: "10000:1003"  # webadmin:psacln
     ports:
       - "5010:5010"
     environment:

@@ -13,18 +13,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
-COPY app/requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code and relevant folders
-COPY app/ .
-COPY app/assets/ ./assets/
-COPY app/docs/ ./docs/
+COPY . .
 
 # Expose the application port
 EXPOSE 5010
 
 # Start the application
-CMD ["panel", "serve", "qr-code-generator.py", "--address", "0.0.0.0", "--port", "5010", "--num-procs", "1", "--allow-websocket-origin=*", "--use-xheaders", "--log-level=info", "--prefix", "/qr-code-generator"]
+CMD ["panel", "serve", "app.py", "--address", "0.0.0.0", "--port", "5010", "--num-procs", "1", "--allow-websocket-origin=*", "--use-xheaders", "--log-level=info"]
 
 # (No USER instruction here; set user at runtime!)
