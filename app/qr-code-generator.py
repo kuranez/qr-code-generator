@@ -146,7 +146,7 @@ template = pn.template.MaterialTemplate(
              pn.pane.Markdown("This is a simple QR Code Generator application built with **`panel`** and **`qrcode`** library."),
              pn.pane.Markdown("You can generate QR codes for any URL and customize their appearance."),
              pn.pane.Markdown("In addition to the basic options, you can also adjust the version, error correction level, box size, and border size of the QR code."),
-             pn.pane.Markdown("**Check the `documentation` for more details.**"),
+             pn.pane.Markdown("**Check the documentation for more details.**"),
              pn.Spacer(),
              pn.pane.Markdown("### Source Code:"),
              pn.pane.Markdown("[https://github.com/kuranez/QR-Code-Generator](https://github.com/kuranez/QR-Code-Generator)"),
