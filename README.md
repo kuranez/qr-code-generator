@@ -19,12 +19,12 @@ A web-based tool built with `panel`and `qrcode` library that allows users to gen
 
 ## ⚙️ Features
 
-> - Generate QR codes from any URL input.
-> - Select error correction level (L, M, Q, H).
-> - Customize QR code size and margin.
-> - Choose foreground and background colors.
-> - Preview QR code instantly.
-> - Download QR code as PNG image.
+> - **Generate** QR codes from any URL input.
+> - **Select** error correction level (L, M, Q, H).
+> - **Customize** QR code size and margin.
+> - **Choose** foreground and background colors.
+> - **Preview** QR code instantly.
+> - **Download** QR code as PNG image.
 > - Responsive web interface built with [Panel](https://panel.holoviz.org/index.html).
 
 ---
@@ -77,9 +77,8 @@ pip install -r requirements.txt
 # Start the app
 panel serve app.py --port 5010
 ```
-Visit [http://localhost:5010](http://localhost:5010) in your browser.
+**Visit [http://localhost:5010](http://localhost:5010) in your browser.**
 
----
 
 ### 2. Run with Docker
 
@@ -90,7 +89,7 @@ docker build -t qr-code-generator .
 # Run the container
 docker run -p 5010:5010 qr-code-generator
 ```
-Open [http://localhost:5010](http://localhost:5010) to use the app.
+**Open [http://localhost:5010](http://localhost:5010) to use the app.**
 
 ---
 
@@ -98,7 +97,6 @@ Open [http://localhost:5010](http://localhost:5010) to use the app.
 
 **Visit the [Project Documentation Page](https://github.com/kuranez/qr-code-generator/blob/main/docs/qr-code-generator-documentation.md) for more info.** 
 
----
 
 ## 📕 Resources
 
@@ -107,7 +105,6 @@ Open [http://localhost:5010](http://localhost:5010) to use the app.
 - [qrcode library on PyPI](https://pypi.org/project/qrcode/)
 - [Docker Documentation](https://docs.docker.com/)
 
----
 
 ## 📘 License
 
