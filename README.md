@@ -1,13 +1,34 @@
 # QR Code Generator
+
+<p align="left">
+  <a href="https://www.python.org/" target="_blank">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+  </a>
+  <a href="https://pypi.org/project/qrcode/" target="_blank">
+    <img src="https://img.shields.io/badge/python--qrcode-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="python-qrcode"/>
+  </a>
+  <a href="https://panel.holoviz.org/" target="_blank">
+    <img src="https://img.shields.io/badge/Holoviz%20Panel-0094A9?style=for-the-badge" alt="Holoviz Panel"/>
+  </a>
+  <a href="https://jupyter.org/" target="_blank">
+    <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter"/>
+  </a>
+  <a href="https://docs.docker.com/" target="_blank">
+    <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
+  </a>
+</p>
+
+
 A web-based tool built with `panel`and `qrcode` library that allows users to generate customized QR codes from URLs, with options to set error correction, size, colors, and download the generated image.
 
 ---
 
 ## 🌐 WebApp 
 
-> **Try the interactive web app — create, customize, and download QR codes instantly, all in your browser.**
+> [![Live Demo](https://img.shields.io/badge/🟢%20Live%20App-%20qr--code--generator-brightgreen?style=for-the-badge)](https://apps.kuracodez.space/qr-code-generator/app)
 >
-> 🟢 [https://apps.kuracodez.space/qr-code-generator/app](https://apps.kuracodez.space/qr-code-generator/app)
+> **Try the interactive web app — create, customize, and download QR codes instantly, all in your browser.**
+
 
 ---
 
@@ -19,13 +40,24 @@ A web-based tool built with `panel`and `qrcode` library that allows users to gen
 
 ## ⚙️ Features
 
-> - **Generate** QR codes from any URL input.
-> - **Select** error correction level (L, M, Q, H).
-> - **Customize** QR code size and margin.
-> - **Choose** foreground and background colors.
-> - **Preview** QR code instantly.
-> - **Download** QR code as PNG image.
-> - Responsive web interface built with [Panel](https://panel.holoviz.org/index.html).
+#### Core Features
+
+🔸 Generate QR codes from any URL input.
+
+🔸 Select error correction level (L, M, Q, H).
+
+🔸 Choose foreground and background colors.
+
+🔸 Preview QR code instantly.
+
+🔸 Download QR code as PNG image.
+
+#### Additional Features
+
+🔸 Responsive web interface built with [Panel](https://panel.holoviz.org/index.html).
+
+🔸 Comprehensive documentation including examples for working in [Jupyter](https://jupyter.org/) Notebooks.
+
 
 ---
 
@@ -33,8 +65,10 @@ A web-based tool built with `panel`and `qrcode` library that allows users to gen
 
 
 **This script utilizes the following Python packages:**
-> - `qrcode`: Used to generate QR codes from user-provided URLs with customizable options.
-> - `panel`: Provides the interactive web interface for user input, QR code preview, and download functionality.
+
+> 🔸 `qrcode`: Used to generate QR codes from user-provided URLs with customizable options.
+> 
+> 🔸 `panel`: Provides the interactive web interface for user input, QR code preview, and download functionality.
 
 **Please ensure these packages are installed in your environment to enable full functionality of the code.**
 
@@ -77,7 +111,8 @@ pip install -r requirements.txt
 # Start the app
 panel serve app.py --port 5010
 ```
-**Visit [http://localhost:5010](http://localhost:5010) in your browser.**
+
+> **🢅 Visit [http://localhost:5010](http://localhost:5010) in your browser.**
 
 
 ### 2. Run with Docker
@@ -89,21 +124,23 @@ docker build -t qr-code-generator .
 # Run the container
 docker run -p 5010:5010 qr-code-generator
 ```
-**Open [http://localhost:5010](http://localhost:5010) to use the app.**
+
+> **🢅 Open [http://localhost:5010](http://localhost:5010) to use the app.**
 
 ---
 
 ## 📙 Documentation
 
-**Visit the [Project Documentation Page](https://github.com/kuranez/qr-code-generator/blob/main/docs/qr-code-generator-documentation.md) for more info.** 
+**Visit the [Project Documentation Page](./docs/qr-code-generator-documentation.md) for more info.** 
 
 
 ## 📕 Resources
 
 
-- [Holoviz Panel](https://panel.holoviz.org/)
-- [qrcode library on PyPI](https://pypi.org/project/qrcode/)
-- [Docker Documentation](https://docs.docker.com/)
+> - [Holoviz Panel](https://panel.holoviz.org/) - A powerful Python framework for creating interactive web apps and dashboards, including the UI for this app.
+> - [`qrcode` library on PyPI](https://pypi.org/project/qrcode/) - A pure Python library to generate QR codes. Used to create and customize QR images from any input.
+> - [Jupyter](https://jupyter.org/) - An interactive environment for running Python code in notebooks, ideal for experimentation, documentation, and prototyping scripts.
+> - [Docker Documentation](https://docs.docker.com/) -  Official guides for containerizing, deploying, and running this app consistently across different environments.
 
 
 ## 📘 License
