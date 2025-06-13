@@ -5,7 +5,7 @@ A web-based tool built with `panel`and `qrcode` library that allows users to gen
 
 ## 🌐 WebApp 
 
-> **Try the interactive QR Code Generator web app — create, customize, and download QR codes instantly, all in your browser.**
+> **Try the interactive web app — create, customize, and download QR codes instantly, all in your browser.**
 >
 > 🟢 [https://apps.kuracodez.space/qr-code-generator/app](https://apps.kuracodez.space/qr-code-generator/app)
 
@@ -13,30 +13,30 @@ A web-based tool built with `panel`and `qrcode` library that allows users to gen
 
 ## Screenshot
 
-> ![webapp.png](https://raw.githubusercontent.com/kuranez/qr-code-generator/refs/heads/main/screenshots/webapp.png)
+> ![webapp.png](https://raw.githubusercontent.com/kuranez/qr-code-generator/refs/heads/main/screenshots/webapp_v.1.1.png)
 
 ---
 
 ## ⚙️ Features
 
-- Generate QR codes from any URL input.
-- Select error correction level (L, M, Q, H).
-- Customize QR code size and margin.
-- Choose foreground and background colors.
-- Preview QR code instantly.
-- Download QR code as PNG image.
-- Responsive web interface built with [Panel](https://panel.holoviz.org/index.html).
+> - Generate QR codes from any URL input.
+> - Select error correction level (L, M, Q, H).
+> - Customize QR code size and margin.
+> - Choose foreground and background colors.
+> - Preview QR code instantly.
+> - Download QR code as PNG image.
+> - Responsive web interface built with [Panel](https://panel.holoviz.org/index.html).
 
 ---
 
 ## 📦 Python Packages
 
 
-This script utilizes the following Python packages:
-- `qrcode`: Used to generate QR codes from user-provided URLs with customizable options.
-- `panel`: Provides the interactive web interface for user input, QR code preview, and download functionality.
+**This script utilizes the following Python packages:**
+> - `qrcode`: Used to generate QR codes from user-provided URLs with customizable options.
+> - `panel`: Provides the interactive web interface for user input, QR code preview, and download functionality.
 
-Please ensure these packages are installed in your environment to enable full functionality of the code.
+**Please ensure these packages are installed in your environment to enable full functionality of the code.**
 
 ---
 
@@ -59,6 +59,8 @@ qr-code-generator/
 |
 └── README.md
 ```
+
+---
 
 ## ❓ How 2 Use
 
@@ -94,7 +96,7 @@ Open [http://localhost:5010](http://localhost:5010) to use the app.
 
 ## 📙 Documentation
 
-**Visit the [Project Documentation Page](https://github.com/kuranez/qr-code-generator/blob/main/app/docs/qr-code-generator-documentation.md) for more info.** 
+**Visit the [Project Documentation Page](https://github.com/kuranez/qr-code-generator/blob/main/docs/qr-code-generator-documentation.md) for more info.** 
 
 ---
 
