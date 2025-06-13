@@ -17,11 +17,13 @@ from qrcode.constants import ERROR_CORRECT_L, ERROR_CORRECT_M, ERROR_CORRECT_Q, 
 import panel as pn
 
 # File Paths
-# output/ # Ensure the output directory exists
-output_dir = os.path.join(os.path.dirname(__file__), "output")
-os.makedirs(output_dir, exist_ok=True)
-# qr_code.png # Path to save the generated QR code image
-file_path = os.path.join(output_dir, "qr_code.png")
+# FOR LOCALLY SAVED QR FILES uncomment the following lines
+# # output/ # Ensure the output directory exists
+# output_dir = os.path.join(os.path.dirname(__file__), "output")
+# os.makedirs(output_dir, exist_ok=True)
+# # qr_code.png # Path to save the generated QR code image
+# file_path = os.path.join(output_dir, "qr_code.png")
+# EVERYTHING ELSE IS IN MEMORY
 # assets/ # Ensure the assets directory exists
 assets_dir = os.path.join(os.path.dirname(__file__), "assets")
 os.makedirs(assets_dir, exist_ok=True)
@@ -116,12 +118,13 @@ def generate_qr(event):
 # Bind function to button clock
 generate_button.on_click(generate_qr)
 
-# Download Button
-download_button = pn.widgets.FileDownload(
-    filename="qr_code.png", 
-    button_type="success",
-    file=file_path
-)
+# Download Button FOR LOCALLY SAVED FILE
+# Uncomment the following lines if you want to use a file download button for a saved file
+# download_button = pn.widgets.FileDownload(
+#     filename="qr_code.png", 
+#     button_type="success",
+#     file=file_path
+# )
 
 # Create a FloatingPanel for documentation
 doc_panel = pn.FloatPanel(
@@ -164,7 +167,7 @@ app = pn.Column(
     qr_display
 )
 
-# Display App
+# DISPLAY APP uncomment to test locally
 # app
 
 template = pn.template.MaterialTemplate(

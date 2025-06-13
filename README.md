@@ -5,7 +5,9 @@ A web-based tool built with `panel`and `qrcode` library that allows users to gen
 
 ## 🌐 WebApp 
 
-> 🟢 **[Live Demo Coming Soon]**
+> **Try the interactive QR Code Generator web app — create, customize, and download QR codes instantly, all in your browser.**
+>
+> 🟢 [https://apps.kuracodez.space/qr-code-generator/app](https://apps.kuracodez.space/qr-code-generator/app)
 
 ---
 
@@ -90,9 +92,15 @@ Open [http://localhost:5010](http://localhost:5010) to use the app.
 
 ---
 
+## 📙 Documentation
+
+**Visit the [Project Documentation Page](https://github.com/kuranez/qr-code-generator/blob/main/app/docs/qr-code-generator-documentation.md) for more info.** 
+
+---
+
 ## 📕 Resources
 
-- [Project Documentation](https://github.com/kuranez/qr-code-generator/blob/main/app/docs/qr-code-generator-documentation.md)
+
 - [Holoviz Panel](https://panel.holoviz.org/)
 - [qrcode library on PyPI](https://pypi.org/project/qrcode/)
 - [Docker Documentation](https://docs.docker.com/)
