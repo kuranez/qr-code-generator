@@ -282,12 +282,12 @@ You can set environment variables like `PYTHONDONTWRITEBYTECODE` and `PYTHONUNBU
 ---
 
 ## References
-
+- [Project GitHub](https://github.com/kuranez/qr-code-generator)
 - [qrcode library documentation](https://pypi.org/project/qrcode/)
 - [Panel documentation](https://panel.holoviz.org/)
 - [Jupyter.org](https://jupyter.org/)
 - [Docker Documentation](https://docs.docker.com/)
-- [Project GitHub](https://github.com/kuranez/qr-code-generator)
+
 
 ---
 
