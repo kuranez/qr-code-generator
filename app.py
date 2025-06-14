@@ -72,11 +72,12 @@ download_buf = io.BytesIO()
 def get_file():
     return download_buf.getvalue()
 
-# Create a download button for the QR code image
+
 download_button = pn.widgets.FileDownload(
-    filename="qr_code.png", 
+    filename="qr_code.png",
     button_type="success",
-    file=get_file
+    callback=lambda: io.BytesIO(download_buf.getvalue()),
+    # embed=True,  # Embed the file in the download button    
 )
 
 # Function to generate QR code
@@ -198,7 +199,7 @@ template = pn.template.MaterialTemplate(
 template.main.append(
     pn.Row(
         pn.Column(
-            pn.pane.Markdown("## Enter a `URL` to generate a `QR` code:"),
+            pn.pane.Markdown("## Enter a `URL` to generate a QR code:"),
             pn.Row(url_input, fill_color_picker, back_color_picker),
             pn.Row(generate_button, download_button),
             qr_display,
