@@ -139,7 +139,8 @@ doc_panel = pn.FloatPanel(
 doc_button = pn.widgets.Button(
     name="Check the documentation 🢅",
     button_type="primary",
-    sizing_mode='stretch_width',
+    # sizing_mode='stretch_width',
+    width=300,
     align='center',
 )
 
