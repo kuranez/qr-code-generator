@@ -137,8 +137,10 @@ doc_panel = pn.FloatPanel(
 
 # Create a button styled as a link
 doc_button = pn.widgets.Button(
-    name="🢅",
+    name="Check the documentation 🢅",
     button_type="primary",
+    sizing_mode='stretch_width',
+    align='center',
 )
 
 # Initially hide the documentation panel
@@ -179,15 +181,12 @@ template = pn.template.MaterialTemplate(
              error_correction_input,
              box_size_input,
              border_input,
+             doc_button,
              pn.Row(),
              pn.pane.Markdown("## Info:"),
              pn.pane.Markdown("This is a simple QR Code Generator application built with **`panel`** and **`qrcode`** library. " \
              "You can generate QR codes for any URL and customize their appearance."),
              pn.pane.Markdown("In addition to the basic options, you can also adjust the version, error correction level, box size, and border size of the QR code."),
-             pn.Row(
-                 pn.pane.Markdown("**Check the `documentation` for more:**"),
-                 doc_button,
-             ),
              pn.pane.Markdown("## Source `code`:"),
              pn.pane.Markdown("[https://github.com/kuranez/qr-code-generator](https://github.com/kuranez/qr-code-generator)"),
              pn.Row(),
