@@ -83,10 +83,10 @@ download_button = pn.widgets.FileDownload(
 # Function to generate QR code
 def generate_qr(event):
     url = url_input.value
-    version = int(version_input.value)
-    error_correction = int(error_correction_input.value)
-    box_size = int(box_size_input.value)
-    border = int(border_input.value)
+    version = version_input.value
+    error_correction = error_correction_input.value
+    box_size = box_size_input.value
+    border = border_input.value
     fill_color = fill_color_picker.value
     back_color = back_color_picker.value
 
