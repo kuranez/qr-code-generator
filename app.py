@@ -203,6 +203,7 @@ template.main.append(
             pn.Row(url_input, fill_color_picker, back_color_picker),
             pn.Row(generate_button, download_button),
             qr_display,
+            align='center',
         ),
         pn.Column(
             doc_panel,
