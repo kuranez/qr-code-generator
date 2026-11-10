@@ -5,8 +5,8 @@
 # It allows users to input a URL, customize QR code appearance, and download the generated QR code image.
 
 # Imports
-# os for file path management
-import os
+# Path for Filepaths
+from pathlib import Path
 # io for handling in-memory file operations
 import io
 # qrcode for generating QR codes
@@ -17,30 +17,19 @@ from qrcode.constants import ERROR_CORRECT_L, ERROR_CORRECT_M, ERROR_CORRECT_Q, 
 import panel as pn
 
 # File Paths
-# FOR LOCALLY SAVED QR FILES uncomment the following lines
-# # output/ # Ensure the output directory exists
-# output_dir = os.path.join(os.path.dirname(__file__), "output")
-# os.makedirs(output_dir, exist_ok=True)
-# # qr_code.png # Path to save the generated QR code image
-# file_path = os.path.join(output_dir, "qr_code.png")
-# EVERYTHING ELSE IS IN MEMORY
-# assets/ # Ensure the assets directory exists
-assets_dir = os.path.join(os.path.dirname(__file__), "assets")
-os.makedirs(assets_dir, exist_ok=True)
-# logo.png and qrapp.png # Paths to the logo and image assets
-logo_path = os.path.join(assets_dir, "logo.png")
-image_path = os.path.join(assets_dir, "qrapp.png")
-# docs/ # Ensure the docs directory exists
-docs_dir = os.path.join(os.path.dirname(__file__), "docs")
-os.makedirs(docs_dir, exist_ok=True)
-# documentation.md # Path to the documentation 
-doc_path = os.path.join(docs_dir, "qr-code-generator-documentation.md")
+
+# Base directory of app.py
+BASE_DIR = Path(__file__).parent
+
+# Paths to assets and markdown files
+logo_path = BASE_DIR / "assets" / "logo.png"
+image_path = BASE_DIR / "assets" / "qrapp.png"
+doc_path = BASE_DIR / "docs" / "documentation.md"
+help_path = BASE_DIR / "docs" / "help" / "advanced-options.md"
 
 # Read the documentation content
-if not os.path.exists(doc_path):
-    raise FileNotFoundError(f"Documentation file not found at {doc_path}")
-with open(doc_path, "r", encoding="utf-8") as f:
-    doc_content = f.read()
+doc_content = doc_path.read_text(encoding="utf-8")
+help_content = help_path.read_text(encoding="utf-8")
 
 # Input Widgets
 url_input = pn.widgets.TextInput(name='URL', value="https://github.com/kuranez/qr-code-generator")
@@ -102,9 +91,6 @@ def generate_qr(event):
     qr.add_data(url)
     qr.make(fit=True)
     img = qr.make_image(fill_color=fill_color, back_color=back_color)
-    
-    # Save the QR code image to a file
-    # img.save(file_path)
 
     # Save to an in-memory buffer for download and display
     download_buf.seek(0)
@@ -119,23 +105,19 @@ def generate_qr(event):
 # Bind function to button clock
 generate_button.on_click(generate_qr)
 
-# Download Button FOR LOCALLY SAVED FILE
-# Uncomment the following lines if you want to use a file download button for a saved file
-# download_button = pn.widgets.FileDownload(
-#     filename="qr_code.png", 
-#     button_type="success",
-#     file=file_path
-# )
+# MD pane
+doc_markdown = pn.pane.Markdown(doc_content, width=600, height=650)
 
-# Create a FloatingPanel for documentation
+# Create a FloatingPanel to wrap MD
 doc_panel = pn.FloatPanel(
-    pn.pane.Markdown(doc_content, width=600, height=650),
+    doc_markdown,
+    name="Documentation & Help",
     width=650,
     height=700,
     margin=20,
 )
 
-# Create a button styled as a link
+# Create buttons for docs
 doc_button = pn.widgets.Button(
     name="Check the documentation 🢅",
     button_type="primary",
@@ -144,17 +126,37 @@ doc_button = pn.widgets.Button(
     align='center',
 )
 
+help_button = pn.widgets.Button(
+    name="Help 🢅",
+    button_type="primary",
+    width=300,
+    align='center',
+)
+
 # Initially hide the documentation panel
 doc_panel.visible = False
 
-# Toggle documentation panel
+# Toogle Help / Documentation Panel
+
 def toggle_doc(event):
-    if doc_panel.visible is True:
+    # If doc already open, close it; otherwise switch to doc and show
+    if doc_panel.visible and doc_markdown.object == doc_content:
         doc_panel.visible = False
     else:
+        doc_markdown.object = doc_content
         doc_panel.visible = True
 
+def toggle_help(event):
+    # If help already open, close it; otherwise switch to help and show
+    if doc_panel.visible and doc_markdown.object == help_content: 
+        doc_panel.visible = False
+    else:
+        doc_markdown.object = help_content
+        doc_panel.visible = True
+
+# Callback for both buttons
 doc_button.on_click(toggle_doc)
+help_button.on_click(toggle_help)
 
 # Layout widgets
 app = pn.Column(
@@ -171,18 +173,15 @@ app = pn.Column(
     qr_display
 )
 
-# DISPLAY APP uncomment to test locally
-# app
-
 template = pn.template.MaterialTemplate(
     title='QR Code Generator',
-    logo=logo_path,
+    logo=str(logo_path),
     sidebar=[pn.pane.Markdown("## Advanced Options:"),
              version_input,
              error_correction_input,
              box_size_input,
              border_input,
-             doc_button,
+             help_button,
              pn.Row(),
              pn.pane.Markdown("## Info:"),
              pn.pane.Markdown("This is a simple QR Code Generator application built with **`panel`** and **`qrcode`** library. " \
@@ -190,6 +189,7 @@ template = pn.template.MaterialTemplate(
              pn.pane.Markdown("In addition to the basic options, you can also adjust the version, error correction level, box size, and border size of the QR code."),
              pn.pane.Markdown("## Source `code`:"),
              pn.pane.Markdown("[https://github.com/kuranez/qr-code-generator](https://github.com/kuranez/qr-code-generator)"),
+             doc_button,
              pn.Row(),
              pn.pane.PNG(image_path, width=300, height=300, align='center'),
             ],
@@ -213,3 +213,12 @@ template.main.append(
 
 # Serve the application
 template.servable();
+
+# Main function wrapper
+
+def main():
+    pn.serve(template, port=5010, show=True)
+
+
+if __name__ == "__main__":
+    main()
