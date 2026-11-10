@@ -10,16 +10,13 @@
   <a href="https://panel.holoviz.org/" target="_blank">
     <img src="https://img.shields.io/badge/Holoviz%20Panel-0094A9?style=for-the-badge" alt="Holoviz Panel"/>
   </a>
-  <a href="https://jupyter.org/" target="_blank">
-    <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter"/>
-  </a>
   <a href="https://docs.docker.com/" target="_blank">
     <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
   </a>
 </p>
 
 
-A web-based tool built with `panel`and `qrcode` library that allows users to generate customized QR codes from URLs, with options to set error correction, size, colors, and download the generated image.
+A web-based tool built with `panel` and `qrcode` library that allows users to generate customized QR codes from URLs, with options to set error correction, size, colors, and download the generated image.
 
 ---
 
@@ -82,14 +79,11 @@ qr-code-generator/
 ├── app.py              # WebApp
 ├── requirements.txt    # Install requirements
 ├── assets/             # Logos
-├── docs/               # Documentation
+├── docs/               # Documentation & Help
 |
 ├── Dockerfile          # Docker files
 ├── docker-compose.yml
 ├── docker-compose.debug.yml
-|
-├── scripts/          # Version history, learning scripts
-├── output/           # Output folder for static QR code generation
 |
 └── README.md
 ```
@@ -107,8 +101,14 @@ cd qr-code-generator
 
 # Install dependencies
 pip install -r requirements.txt
+```
+**Option A: Run using Python** 
+```python
+python app.py
+```
 
-# Start the app
+**Option B: Run using Panel**
+```python
 panel serve app.py --port 5010
 ```
 
@@ -131,7 +131,7 @@ docker run -p 5010:5010 qr-code-generator
 
 ## 📙 Documentation
 
-**Visit the [Project Documentation Page](./docs/qr-code-generator-documentation.md) for more info.** 
+**Visit the [Project Documentation Page](./docs/documentation.md) for more info.** 
 
 
 ## 📕 Resources
@@ -139,7 +139,6 @@ docker run -p 5010:5010 qr-code-generator
 
 > - [Holoviz Panel](https://panel.holoviz.org/) - A powerful Python framework for creating interactive web apps and dashboards, including the UI for this app.
 > - [`qrcode` library on PyPI](https://pypi.org/project/qrcode/) - A pure Python library to generate QR codes. Used to create and customize QR images from any input.
-> - [Jupyter](https://jupyter.org/) - An interactive environment for running Python code in notebooks, ideal for experimentation, documentation, and prototyping scripts.
 > - [Docker Documentation](https://docs.docker.com/) -  Official guides for containerizing, deploying, and running this app consistently across different environments.
 
 
